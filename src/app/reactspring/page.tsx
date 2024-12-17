@@ -1,31 +1,58 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { animated, useSpring } from "@react-spring/web";
 
 const page = () => {
+  const [number, setNumber] = useState(0);
   //적용할 DOM 요소
   const configDivRef = useRef<HTMLDivElement>(null);
 
   //너비가 채워지고 비워줄 상태를 체크
   const [configOpen, setConfigOpen] = useState<boolean>(false);
+  const [numberProps, api] = useSpring(
+    () => ({
+      valeu: 0,
+      from: { value: 0 },
+      config: { tension: 200, friction: 20 },
+    }),
+    []
+  );
 
   const props = useSpring({
     //state 상태가 업데이트 되면 적용될 width 값을 가지는 객체
     width: configOpen ? configDivRef.current?.clientWidth : 0,
   });
 
-  console.log(typeof props.width);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newNum = (Math.random() * 100).toFixed();
+      setNumber(parseInt(newNum));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    api.start({
+      to: { value: number },
+    });
+  }, [number, api]);
 
   return (
     <div className="flex flex-col bg-gray-200">
       <p>{"Config"}</p>
       <animated.p>
         {props.width?.to((x) => {
-          console.log(x);
+          //   console.log(x);
           return x;
         })}
       </animated.p>
+
+      <animated.span>{number}</animated.span>
+      <animated.span>
+        {numberProps.value.to((val) => val.toFixed(0))}
+      </animated.span>
+
       <div
         ref={configDivRef}
         className="w-[200px] h-[100px] outline outline-2 outline-neutral-700 cursor-pointer relative"

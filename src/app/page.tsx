@@ -84,9 +84,9 @@ export default function Home() {
               <p className="text-[14px]">As featured in</p>
             </div>
             <ul className="mt-5 flex flex-wrap gap-6">
-              {imgurl.map((item) => {
+              {imgurl.map((item, index) => {
                 return (
-                  <li>
+                  <li key={index}>
                     <img src={item} alt="" />
                   </li>
                 );
