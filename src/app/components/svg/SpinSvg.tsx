@@ -16,7 +16,7 @@ const SpinSvg = () => {
       <path
         d="M913 513c0 220.914-179.086 400-400 400"
         stroke="url(#:S1:-gradient-2)"
-        stroke-linecap="round"
+        strokeLinecap="round"
       ></path>
       <defs>
         <linearGradient
@@ -27,8 +27,8 @@ const SpinSvg = () => {
           y2="913"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#06b6d4"></stop>
-          <stop offset="1" stop-color="#06b6d4" stop-opacity="0"></stop>
+          <stop stopColor="#06b6d4"></stop>
+          <stop offset="1" stopColor="#06b6d4" stop-opacity="0"></stop>
         </linearGradient>
       </defs>
     </svg>
